@@ -49,7 +49,7 @@ public class GrapheListAdj implements VarGraph {
     }
 
     // Vérifie si un sommet est présent dans le graphe
-    public boolean HasSommet (String noeud) {
+    public boolean hasSommet(String noeud) {
         return ListAdjacence.containsKey(noeud);
     }
 
