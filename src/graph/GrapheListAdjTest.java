@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GrapheListAdjTest {
 
+    private static final int VALEUR_PAR_DEFAUT_ARC = 1;
+
     @Test
     public void testAjoutSommet() {
         GrapheListAdj graphe = new GrapheListAdj();
@@ -19,7 +21,7 @@ public class GrapheListAdjTest {
     @Test
     public void testAjoutArc() {
         GrapheListAdj graphe = new GrapheListAdj();
-        graphe.ajouterArc("A", "B");
+        graphe.ajouterArc("A", "B", VALEUR_PAR_DEFAUT_ARC);
 
         assertTrue(graphe.hasSommet("A"));
         assertTrue(graphe.hasSommet("B"));
@@ -30,23 +32,23 @@ public class GrapheListAdjTest {
         assertEquals("B", graphe.getSucc("A").get(0).dst());
         assertEquals("A", graphe.getSucc("B").get(0).dst());
 
-        assertEquals(1, graphe.getSucc("A").get(0).val());
+        assertEquals(VALEUR_PAR_DEFAUT_ARC, graphe.getSucc("A").get(0).val());
     }
 
     @Test
     public void testAjoutArcDoubleLeveException() {
         GrapheListAdj graphe = new GrapheListAdj();
-        graphe.ajouterArc("A", "B");
+        graphe.ajouterArc("A", "B", VALEUR_PAR_DEFAUT_ARC);
 
-        assertThrows(IllegalArgumentException.class, () -> graphe.ajouterArc("A", "B"));
-        assertThrows(IllegalArgumentException.class, () -> graphe.ajouterArc("B", "A"));
+        assertThrows(IllegalArgumentException.class, () -> graphe.ajouterArc("A", "B", VALEUR_PAR_DEFAUT_ARC));
+        assertThrows(IllegalArgumentException.class, () -> graphe.ajouterArc("B", "A", VALEUR_PAR_DEFAUT_ARC));
     }
 
     @Test
     public void testVoisins() {
         GrapheListAdj graphe = new GrapheListAdj();
-        graphe.ajouterArc("A", "B");
-        graphe.ajouterArc("A", "C");
+        graphe.ajouterArc("A", "B", VALEUR_PAR_DEFAUT_ARC);
+        graphe.ajouterArc("A", "C", VALEUR_PAR_DEFAUT_ARC);
 
         List<String> voisins = graphe.getVoisin("A");
         assertTrue(voisins.contains("B"));
@@ -56,16 +58,13 @@ public class GrapheListAdjTest {
 
     @Test
     public void testSurchargeConstructeur() {
-        // Format avec des valeurs entre parenthèses
-        String description = "A-B(5), B-C(3), C-D(1), E:";
+        String description = "A-B(5), B-C(3), C-D(1), E-E(0)";
 
         GrapheListAdj graphe = new GrapheListAdj(description);
 
-        // Sommets attendus
         Set<String> attendus = Set.of("A", "B", "C", "D", "E");
-        assertEquals(attendus, graphe.getAllNoeuds());
+        assertEquals(attendus, graphe.getAllSommets());
 
-        // Vérifie que chaque arc existe
         assertEquals(1, graphe.getSucc("A").size());
         assertEquals("B", graphe.getSucc("A").get(0).dst());
 
@@ -78,16 +77,16 @@ public class GrapheListAdjTest {
         assertEquals(1, graphe.getSucc("D").size());
         assertEquals("C", graphe.getSucc("D").get(0).dst());
 
-        assertEquals(0, graphe.getSucc("E").size()); // sommet isolé
+        assertEquals(1, graphe.getSucc("E").size());
+        assertEquals("E", graphe.getSucc("E").get(0).dst());
     }
 
     @Test
     public void testGetAllNoeuds() {
         GrapheListAdj graphe = new GrapheListAdj();
-        graphe.ajouterArc("A", "B");
-        graphe.ajouterArc("B", "C");
-
-        Set<String> noeuds = graphe.getAllNoeuds();
+        graphe.ajouterArc("A", "B", VALEUR_PAR_DEFAUT_ARC);
+        graphe.ajouterArc("B", "C", VALEUR_PAR_DEFAUT_ARC);
+        Set<String> noeuds = graphe.getAllSommets();
         assertEquals(3, noeuds.size());
         assertTrue(noeuds.containsAll(List.of("A", "B", "C")));
     }
@@ -95,8 +94,8 @@ public class GrapheListAdjTest {
     @Test
     public void testGetAllArcsSansDoublons() {
         GrapheListAdj graphe = new GrapheListAdj();
-        graphe.ajouterArc("A", "B");
-        graphe.ajouterArc("B", "C");
+        graphe.ajouterArc("A", "B", VALEUR_PAR_DEFAUT_ARC);
+        graphe.ajouterArc("B", "C", VALEUR_PAR_DEFAUT_ARC);
 
         List<Graph.Arc<String>> arcs = graphe.getAllArcs();
         assertEquals(2, arcs.size());

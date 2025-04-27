@@ -62,7 +62,8 @@ public interface ShortestPath<T> {
 
 	/**
 	 * Calcul des plus courts chemins.
-	 * //@param <T>     Identifiant des sommets. Le type doit être "hachable".
+	 * 
+	 * @param <T>      Identifiant des sommets. Le type doit être "hachable".
 	 * @param g        Le graphe pour lequel le calcul est demandé.
 	 * @param src      Le sommet de {@code g} à partir duquel les plus courts chemins
 	 *                 sont demandés.
@@ -70,12 +71,12 @@ public interface ShortestPath<T> {
 	 *                 distance est connue.           
 	 * @return Une instance de {@code Resultat<T>} contenant tous les résultats.
 	 */
-	Distances<T> compute(Graph<T> g, T src, Animator<T> animator);
+	Distances<T> compute(Graph<T> g, T src, Animator<T> animator) throws IllegalArgumentException;
 	
 	/**
 	 * Calcul des plus courts chemins sans animation.
 	 */
-	default Distances<T> compute(Graph<T> g, T src) {
+	default Distances<T> compute(Graph<T> g, T src) throws IllegalArgumentException {
 		return compute(g, src, (n, d) -> {});
 	}
 }

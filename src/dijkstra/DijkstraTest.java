@@ -6,6 +6,7 @@ import java.util.List;
 
 import graph.Graph;
 import graph.GrapheListAdj;
+import graph.GrapheListAdj;
 import graph.ShortestPath.Distances;
 import graph.VarGraph;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ class DijkstraTest {
 	private static final String TO = "F"; 
 	private static final int EXPECTED_DIST = 5; 
 	private static final List<String> EXPECTED_PATH = List.of("F", "E", "B", "D", "A"); // in pred order
+	private static final Dijkstra<String> dijkstra = new Dijkstra<String>();
 
 	@Test
 	void test() {
@@ -24,7 +26,7 @@ class DijkstraTest {
 	}
 
 	void tester(Graph g) {
-		Distances<String> dst = new Dijkstra<String>().compute(g, FROM);
+		Distances<String> dst = dijkstra.compute(g, FROM);
 		assertEquals(EXPECTED_DIST, dst.dist().get(TO));
 		String c = EXPECTED_PATH.get(0);
 		for (String s : EXPECTED_PATH) {
@@ -32,5 +34,13 @@ class DijkstraTest {
 			c = dst.pred().get(c);
 		}
 		assertNull(c);
+	}
+
+	@Test
+	void pasDeValuationNegative() {
+		VarGraph g = new GrapheListAdj();
+		g.peupler("A-B(6), A-C(1), A-D(2), B-E(-3), C-E(4), D-B(1), E-F(1)"); // B-E negatif !
+		assertThrows(IllegalArgumentException.class,
+				()->  dijkstra.compute(g, FROM));
 	}
 }
