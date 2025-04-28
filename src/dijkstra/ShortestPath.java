@@ -1,4 +1,6 @@
-package graph;
+package dijkstra;
+
+import graph.Graph;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

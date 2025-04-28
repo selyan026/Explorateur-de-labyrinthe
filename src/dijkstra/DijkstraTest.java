@@ -6,8 +6,7 @@ import java.util.List;
 
 import graph.Graph;
 import graph.GrapheListAdj;
-import graph.GrapheListAdj;
-import graph.ShortestPath.Distances;
+import dijkstra.ShortestPath.Distances;
 import graph.VarGraph;
 import org.junit.jupiter.api.Test;
 
