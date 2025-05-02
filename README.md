@@ -1,1 +1,2 @@
-Ajoutez ici le prénom, le nom des participants et le groupe de TP de toute l'équipe
+Partie JAVA de la SAE2.02, fait par les membres du Groupe 104 : IDRI Selyan, Fourra Ismail, BAKHTAOUI Yassin et BEN AKREMI Ali. 
+Notre chargé de TP est Monsieur Mikal ZIANE
