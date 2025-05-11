@@ -1,5 +1,7 @@
-package graph;
+package graph.test;
 
+import graph.Graph;
+import graph.GrapheListAdj;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
