@@ -10,7 +10,7 @@ import graph.Graph;
 import graph.GrapheListAdj;
 import graph.VarGraph;
 import dijkstra.Dijkstra;
-import dijkstra.ShortestPath.Distances;
+import graph.ShortestPath.Distances;
 
 import org.junit.jupiter.api.Test;
 

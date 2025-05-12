@@ -1,6 +1,8 @@
 package dijkstra;
 
 import graph.Graph;
+import graph.ShortestPath;
+
 import java.util.*;
 
 public class Dijkstra<T> implements ShortestPath<T> {
