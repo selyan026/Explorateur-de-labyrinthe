@@ -9,10 +9,14 @@ public class Dijkstra<T> implements ShortestPath<T> {
 
     @Override
     public Distances<T> compute(Graph<T> g, T src, Animator<T> animator) {
+        if (g == null) throw new IllegalArgumentException("le graphe ne peut pas être nul");
+        if (src == null) throw new IllegalArgumentException ("Le sommet source ne peut pas être nul");
+
         Map<T, Integer> dist = new HashMap<>();
         Map<T, T> pred = new HashMap<>(); // Stock les prédécesseurs
         Set<T> visited = new HashSet<>(); // Sommets déjà visités
         PriorityQueue<T> file = new PriorityQueue<>(Comparator.comparingInt(dist::get));
+
 
         // Initialisation avec un distance de 0 et pas de prédécesseurs
         dist.put(src, 0);

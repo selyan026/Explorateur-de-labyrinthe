@@ -22,9 +22,10 @@ public interface Graph<T> {
 
 	/**
 	 * Donne la liste des arcs sortants d'un sommet.
-	 * 
+	 *
 	 * @param s Le sommet.
 	 * @return La liste des arcs sortants de {@code s}.
 	 */
 	List<Arc<T>> getSucc(T s);
+
 }
