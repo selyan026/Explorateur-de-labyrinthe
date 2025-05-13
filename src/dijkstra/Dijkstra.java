@@ -12,6 +12,7 @@ public class Dijkstra<T> implements ShortestPath<T> {
         if (g == null) throw new IllegalArgumentException("le graphe ne peut pas être nul");
         if (src == null) throw new IllegalArgumentException ("Le sommet source ne peut pas être nul");
 
+
         Map<T, Integer> dist = new HashMap<>();
         Map<T, T> pred = new HashMap<>(); // Stock les prédécesseurs
         Set<T> visited = new HashSet<>(); // Sommets déjà visités
