@@ -14,9 +14,8 @@ Méthodes principales :
 - peupler : génération automatique à partir d’une chaîne (ex : "A-B(3), B-C(2)")
 
 L’algorithme de Dijkstra est codé dans la classe Dijkstra, en respectant l’interface ShortestPath.  
-Il calcule les distances minimales depuis un sommet source, lève une IllegalArgumentException en cas d’arc de valeur négative, comme demandé dans le sujet.
-
-Deux versions de compute sont disponibles (avec et sans Animator).  
+Il calcule les distances minimales depuis un sommet source, lève une IllegalArgumentException en cas d’arc de valeur négative.
+  
 Les tests de DijkstraTest ont tous été validés.
 
 
