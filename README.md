@@ -1,26 +1,42 @@
-# SAE 2.02 — Graphes et Labyrinthes
-## Membres de l’équipe
-- IDRI Selyan 
-- BEN AKREMI Ali
-- FOURRA Ismail
-- BAKHTAOUI Yassin
-Notre chargé de TP est Monsieur Mikal ZIANE <br> <br> 
+# SAE 2.02 Exploration algorithmique d’un problème
 
-## Fonctionnalités implémentées
-- **Implémentation de l'algorithme de Dijkstra** dans la classe `Dijkstra`, conforme à l’interface `ShortestPath<T>`.
-- **Structure de graphe personnalisée** `GrapheListAdj` basée sur une liste d’adjacence.
-- **Adaptateur `GraphMaze`** codé pour connecter un `RegularMaze` à l’interface `Graph`.
-- **Checker opérationnel** : tous les fichiers `.maze` et `.dist` fournis dans `bench/` passent les tests sans erreur.
-- **Animation graphique** fonctionnelle avec `Animation.java` : le chemin trouvé s’affiche correctement sur les labyrinthes.
-- **Tests unitaires** présents, dont ceux fournis sur Moodle (`DijkstraTest`, `GrapheListAdjTest`, etc.).
-- **Sérialisation/lecture** des distances (`Distances.writeDist()` / `Distances.readDist()`).
+Projet réalisé par le groupe 104 :  
+IDRI Selyan, FOURRA Ismail, BAKHTAOUI Yassin, BEN AKREMI Ali  
+Chargé de TP : Mikal Ziane
 
-## Limites ou problèmes
-- Aucun bug critique n’a été identifié.
-- Tous les cas de test fournis passent. L'algorithme lève correctement une `IllegalArgumentException` si un arc a une valuation négative.
+## Partie 1 – Représentation des graphes et algorithme de Dijkstra
+Nous avons d’abord créé une structure de graphe orienté pondéré : la classe GrapheListAdj, basée sur une liste d’adjacence.
 
-## Remarques
-- La classe `Dijkstra` est **générique**, fonctionne avec tout type de graphe conforme à l’interface `Graph<T>`.
-- Le projet respecte les principes de **clarté du code**, de **non-duplication**, de **taille raisonnable des méthodes** (10 à 15 lignes), et **d'encapsulation**.
-- Le diagramme d’architecture est fourni dans le fichier `architecture.pdf`.
+Méthodes principales :
+- ajouterSommet, ajouterArc : construction manuelle du graphe
+- getSucc, getVoisin : accès aux successeurs et voisins
+- getAllSommets, getAllArcs : récupération complète du graphe
+- peupler : génération automatique à partir d’une chaîne (ex : "A-B(3), B-C(2)")
 
+L’algorithme de Dijkstra est codé dans la classe Dijkstra, en respectant l’interface ShortestPath.  
+Il calcule les distances minimales depuis un sommet source, lève une IllegalArgumentException en cas d’arc de valeur négative, comme demandé dans le sujet.
+
+Deux versions de compute sont disponibles (avec et sans Animator).  
+Les tests de DijkstraTest ont tous été validés.
+
+
+## Partie 2 – Résolution automatique de labyrinthes
+
+Pour adapter Dijkstra aux labyrinthes, on utilise les fichiers .maze (labyrinthe) et .dist (résultats attendus).
+
+La classe GraphMaze permet de convertir un RegularMaze en un graphe exploitable :
+- getSucc renvoie les cases voisines accessibles sous forme d’arcs de coût 1
+
+La classe Checker applique automatiquement Dijkstra sur chaque labyrinthe, compare les résultats avec ceux attendus, et affiche "succès" ou "échec".
+
+Une visualisation est possible via la classe Animation, qui affiche le labyrinthe et le chemin trouvé.
+
+Tous les fichiers du dossier bench ont été testés avec succès.
+
+
+## Bilan
+
+- Implémentation conforme au sujet
+- Tous les tests passent
+- Code organisé par packages : graph, dijkstra, adaptateur, application
+- Dijkstra fonctionne sur des graphes textuels comme sur des labyrinthes binaires
