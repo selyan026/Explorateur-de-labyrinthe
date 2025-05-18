@@ -1,12 +1,26 @@
-Partie JAVA de la SAE2.02, fait par les membres du Groupe 104 : IDRI Selyan, FOURRA Ismail, BAKHTAOUI Yassin et BEN AKREMI Ali. 
+# SAE 2.02 — Graphes et Labyrinthes
+## Membres de l’équipe
+- IDRI Selyan 
+- BEN AKREMI Ali
+- FOURRA Ismail
+- BAKHTAOUI Yassin
 Notre chargé de TP est Monsieur Mikal ZIANE <br> <br> 
 
+## Fonctionnalités implémentées
+- **Implémentation de l'algorithme de Dijkstra** dans la classe `Dijkstra`, conforme à l’interface `ShortestPath<T>`.
+- **Structure de graphe personnalisée** `GrapheListAdj` basée sur une liste d’adjacence.
+- **Adaptateur `GraphMaze`** codé pour connecter un `RegularMaze` à l’interface `Graph`.
+- **Checker opérationnel** : tous les fichiers `.maze` et `.dist` fournis dans `bench/` passent les tests sans erreur.
+- **Animation graphique** fonctionnelle avec `Animation.java` : le chemin trouvé s’affiche correctement sur les labyrinthes.
+- **Tests unitaires** présents, dont ceux fournis sur Moodle (`DijkstraTest`, `GrapheListAdjTest`, etc.).
+- **Sérialisation/lecture** des distances (`Distances.writeDist()` / `Distances.readDist()`).
 
-Partie 1 – Représentation des graphes et algorithme de Dijkstra <br> <br>
+## Limites ou problèmes
+- Aucun bug critique n’a été identifié.
+- Tous les cas de test fournis passent. L'algorithme lève correctement une `IllegalArgumentException` si un arc a une valuation négative.
 
-Dans cette première partie, nous avons développé une structure de graphe personnalisée nommée GrapheListAdj, qui implémente les interfaces Graph<String> et VarGraph. Elle utilise une représentation par liste d’adjacence pour gérer dynamiquement les sommets et les arcs pondérés. <br>
+## Remarques
+- La classe `Dijkstra` est **générique**, fonctionne avec tout type de graphe conforme à l’interface `Graph<T>`.
+- Le projet respecte les principes de **clarté du code**, de **non-duplication**, de **taille raisonnable des méthodes** (10 à 15 lignes), et **d'encapsulation**.
+- Le diagramme d’architecture est fourni dans le fichier `architecture.pdf`.
 
-Cette classe permet notamment de construire des graphes manuellement à partir d’une description textuelle (ex : "A-B(3), B-C(2)") et est compatible avec l’algorithme de Dijkstra. <br>
-
-L’algorithme de Dijkstra est ensuite implémenté dans la classe Dijkstra, qui respecte l’interface ShortestPath<T>. Il permet de calculer les distances minimales depuis un sommet source vers tous les sommets accessibles.
-L’implémentation lève une exception si un arc de valuation négative est détecté, comme exigé dans le sujet. Les tests sont réalisés dans la classe DijkstraTest, en se basant sur les graphes construits avec GrapheListAdj.
